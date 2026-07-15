@@ -1,0 +1,25 @@
+FROM ubuntu:22.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    gcc-12 \
+    python3 python3-pip \
+    gdb \
+    qemu-system-x86 \
+    qemu-utils \
+    libguestfs-tools \
+    linux-image-6.2.0-generic \
+    linux-headers-6.2.0-generic \
+    bc flex bison \
+    libncurses-dev \
+    libssl-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN python3 -m pip install pwntools
+
+RUN useradd -m -s /bin/bash researcher
+
+WORKDIR /home/researcher
+CMD ["/bin/bash"]

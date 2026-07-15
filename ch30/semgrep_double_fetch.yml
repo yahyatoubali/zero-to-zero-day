@@ -1,0 +1,17 @@
+rules:
+  - id: double-fetch
+    patterns:
+      - pattern: |
+          $VAR = *$SRC;
+          ...
+          $VAR2 = *$SRC;
+      - pattern-not: |
+          $VAR = READ_ONCE(*$SRC);
+      - pattern-not: |
+          $VAR = __READ_ONCE(*$SRC);
+    message: >
+      Possible double-fetch vulnerability: $SRC is read from user memory twice.
+      The value may change between reads (TOCTOU). Use READ_ONCE() to ensure
+      a consistent value.
+    languages: [c]
+    severity: WARNING

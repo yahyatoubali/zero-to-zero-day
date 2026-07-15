@@ -1,0 +1,14 @@
+rules:
+  - id: kernel-copy-from-user-no-check
+    patterns:
+      - pattern: |
+          copy_from_user(DST, $SRC, $SIZE)
+      - pattern-not: |
+          if (... $SIZE > ...) { ... }
+      - pattern-not: |
+          if (... $SIZE >= ...) { ... }
+    message: >
+      copy_from_user with size $SIZE is not guarded by a size check.
+      Ensure $SIZE is validated before copy.
+    languages: [c]
+    severity: ERROR

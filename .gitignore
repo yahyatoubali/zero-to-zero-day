@@ -1,0 +1,38 @@
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+venv/
+.venv/
+
+# Build artifacts
+*.o
+*.ko
+*.bin
+*.elf
+a.out
+core
+vgcore.*
+
+# Docker
+.docker/
+
+# IDA
+*.id0
+*.id1
+*.id2
+*.nam
+*.til
+
+# Editor
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
